@@ -101,8 +101,35 @@ function VideoPlayer(props) {
     </div>
   );
 }
-```
+------------------
+function VideoPlayer(props) {
+  return (
+    <div>
+      <video
+        src={props.videoUrl}
+        width={props.width}
+        height={props.height}
+      />
+      <p>{props.description}</p>
+    </div>
+  );
+}
 
+//OR 
+
+function VideoPlayer ({videoUrl, width, height, description}) {
+  return (
+    <div>
+      <video
+        src={videoUrl}
+        width={width}
+        height={height}
+      />
+      <p>{description}</p>
+    </div>
+  );
+}
+```
 ---
 
 ```jsx
@@ -127,6 +154,30 @@ function Tweet(props) {
     </div>
   );
 }
+
+---------------
+
+function Tweet ({avatar, username, handle, date, tweet}) {
+  return (
+    <div>
+      <Avatar src={avatar} />
+      <div>
+        <p>
+          <span className="user-name">{username}</span>
+          <span className="handle">{handle}</span>
+          <span className="date">{date}</span>
+        </p>
+        <p>{tweet}</p>
+        <div>
+          <button>Reply</button>
+          <button>Retweet</button>
+          <button>Like</button>
+          <button>Share</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 ```
 
 ---
@@ -140,6 +191,21 @@ function Header(props) {
       <nav>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
+      </nav>
+    </header>
+  );
+}
+
+-----------------
+
+function Header(props) {
+  return (
+    <header>
+      <h1>{props.title}</h1>
+
+      <nav>
+        <a href={props.nav.first}>{props.nav.first.about}</a>
+        <a href={props.nav.contacts}>{props.nav.contacts.contact}</a>
       </nav>
     </header>
   );
@@ -213,7 +279,7 @@ const storeItems = [
   { id: 'c', price: 44.99, name: 'Top Hat' },
 ];
 
-function App(props) {
+function App() {
   return (
     <div>
       {storeItems.map(item => (
@@ -222,6 +288,20 @@ function App(props) {
     </div>
   );
 }
+
+---------------
+
+//or if passing something
+function App(props) {
+  return (
+    <div>
+      {props.storeItems.map(item => (
+        <StoreItem name={item.name} price={item.price} />
+      ))}
+    </div>
+  );
+}
+
 ```
 
 ---
@@ -254,6 +334,52 @@ const pets = [
     />
   </ul>
 </div>;
+
+---------------
+
+<div>
+  <h1 className="title">My pets:</h1>
+  <ul>
+  {pets.map(pet => (
+    <PetInfo
+      name={pets[0].name}
+      age={pets[0].age}
+      species={pets[0].species}
+      breed={pets[0].breed}
+    />
+    <PetInfo
+      name={pets[1].name}
+      age={pets[1].age}
+      species={pets[1].species}
+      breed={pets[1].breed}
+    />
+    ))}
+  </ul>
+</div>;
+
+//OR
+
+<div>
+  <h1 className="title">My pets:</h1>
+  <ul>
+  {pets.map(pet => {
+    return (
+    <PetInfo
+      name={pets[0].name}
+      age={pets[0].age}
+      species={pets[0].species}
+      breed={pets[0].breed}
+    />
+    <PetInfo
+      name={pets[1].name}
+      age={pets[1].age}
+      species={pets[1].species}
+      breed={pets[1].breed}
+    />)
+    })}
+  </ul>
+</div>;
+
 ```
 
 ---
@@ -288,6 +414,14 @@ const pizzaToppings = [
   <Topping name="green pepper" />
   <Topping name="broccoli" />
 </Pizza>
+---------------
+<Pizza>
+  {pizzaToppings
+  .filter(toping => topping.isVegetarian)
+  .map(topping => <Topping name={topping.name} />
+  )}
+</Pizza>
+
 ```
 
 Hint: You'll need `filter` as well as `map`

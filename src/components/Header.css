@@ -1,10 +1,30 @@
 header {
   height: 100px;
-  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  
   /* 
     Protip: layering multiple box shadows can create a
     richer shadow effect than just using a single one.
   */
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15),
     0px 1px 0.5px rgba(0, 0, 0, 0.075);
+  background: rgb(195,76,110);
+  background: linear-gradient(0deg, rgba(195,76,110,1) 0%, rgba(240,128,128,1) 38%);
+}
+
+.user-container {
+  line-height: 50%;
+  text-align: center;
+  padding: 5%;
+}
+
+.avatar {
+  max-height: 40px;
+  max-width: 40px;
+  border-radius: 100%;
+}
+
+.username {
+  font-size: 12px;
 }

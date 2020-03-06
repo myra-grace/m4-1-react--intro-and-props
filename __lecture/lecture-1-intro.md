@@ -140,7 +140,7 @@ A _slot_ in which we can write JavaScript expressions.
 ```jsx
 let index = 0;
 
-<div id={'item-' + index} />;
+<div id={`item-${index}`} />;
 ```
 
 ---
@@ -160,6 +160,10 @@ render(
 
 ```jsx
 <li className={isOnline && 'green'}>{user.username}</li>
+//like:
+<li className={isOnline ? 'green' : ''}>{user.username}</li>
+//basically, if isOnline is true, give class 'green'
+
 
 // ⚠️ New notation! another way to use of &&.
 ```
@@ -180,6 +184,11 @@ let age = 10;
 </div>;
 ```
 
+<div class="wrapper">
+  <img src='/images/cake.jpg' alt='birthday cake'/>
+  <p>Happy 10th birthday!<p>
+</div>
+
 ---
 
 Convert this one too:
@@ -189,7 +198,7 @@ let agreeToTerms = false;
 
 <div>
   <label htmlFor="terms-of-service">
-    <input type="checkbox" id="terms-of-service" /> I agree to the terms
+    <input name='terms-and-services' type="checkbox" id="terms-of-service" /> I agree to the terms
   </label>
 
   {agreeToTerms && (
@@ -197,6 +206,13 @@ let agreeToTerms = false;
   )}
 </div>;
 ```
+
+<div>
+  <label for="terms-of-service">
+    <input name='terms-and-services' type="checkbox" id="terms-of-service" /> I agree to the terms
+  </label>
+<!-- not gonna display non for soul thing cause will still show in html. better jsx cause creates it if agree to terms. -->
+</div>
 
 ---
 
@@ -262,7 +278,54 @@ const pets = [
     </li>
   </ul>
 </div>;
+
 ```
+
+<div>
+  <h1 class="title">My pets:</h1>
+  <ul>
+    <li>
+      <h3>Barak Obama</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Age</th>
+            <th>Species</th>
+            <th>Breed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3</td>
+            <td>dog</td>
+            <td>Labradoodle</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+
+  <li>
+      <h3>Chairman Meow</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Age</th>
+            <th>Species</th>
+            <th>Breed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8</td>
+            <td>cat</td>
+            <td>ragdoll</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+
+  </ul>
+</div>
 
 ---
 
@@ -293,6 +356,7 @@ ReactDOM.render(
   </head>
   <body>
     <noscript>This page requires Javascript</noscript>
+    <!-- non script disable js -->
     <div id="root"></div>
   <body>
 </html>
@@ -316,6 +380,7 @@ Now it fits on the screen:
   <h1 className="title">My pets:</h1>
   <ul>
     <PetInfo
+    // there's a PetInfo class thingy component
       name={pet[0].name}
       age={pet[0].age}
       species={pet[0].species}
